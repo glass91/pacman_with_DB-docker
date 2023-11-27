@@ -13,22 +13,23 @@ services:
     restart: unless-stopped
 
   mongo:
-   image: mongo:4.0.4
-   ports:
-     - "27017:27017" # Expose MongoDB on port 27017
-   volumes:
-     - mongo-db:/data/db
-     - ./mongo-init-db/init_user_db.js:/docker-entrypoint-initdb.d/init_user_db.js:ro  # Mount the initialization script directory
-   restart: unless-stopped
+    image: mongo:4.0.4
+    ports:
+      - "27017:27017" # Expose MongoDB on port 27017
+    volumes:
+      - mongo-db:/data/db
+      - ./mongo-init-db/init_user_db.js:/docker-entrypoint-initdb.d/init_user_db.js:ro  # Mount the initialization script directory
+    restart: unless-stopped
+
 volumes:
   mongo-db:
     driver: local
   mongo-initdb:
-    driver: local
     driver_opts:
       type: none
       device: $PWD/mongo-init-db # need folder mongo-init-db in the same folder as docker-compose.yml
       o: bind
+
 networks:
   pacman-network:
-  external:true
+    external: true
