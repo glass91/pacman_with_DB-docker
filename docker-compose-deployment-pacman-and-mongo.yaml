@@ -30,6 +30,5 @@ volumes:
       device: $PWD/mongo-init-db # need folder mongo-init-db in the same folder as docker-compose.yml
       o: bind
 networks:
-  default:
-    external:
-      name: pacman-network
+  pacman-network:
+  external:true
